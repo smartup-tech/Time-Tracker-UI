@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  ui:
+    # Option 1: Use this if you have created an image (../build-image.sh)
+    #image: time-tracker-frontend
+
+    # Option 2: Or build an image
+    build:
+      context: ../../
+      dockerfile: ./ops-tools/docker/Dockerfile
+    container_name: timetracker-ui
+    environment:
+      TIMETRACKER_API_URL: http://app:8080/api/
+    ports:
+      - "8082:80"
+    networks:
+      - timetracker-network
+
+networks:
+  timetracker-network:
+    driver: bridge

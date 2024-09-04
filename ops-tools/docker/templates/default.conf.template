@@ -1,0 +1,20 @@
+server {
+    listen 8082;
+    server_name localhost;
+
+    root /var/www/timetracker;
+
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html?$args;
+    }
+
+    location /api/ {
+        proxy_set_header host $host;
+        proxy_set_header X-real-ip $remote_addr;
+        proxy_set_header X-forward-for $proxy_add_x_forwarded_for;
+
+        proxy_pass ${TIMETRACKER_API_URL};
+    }
+}

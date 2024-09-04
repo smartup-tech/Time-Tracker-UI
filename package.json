@@ -1,0 +1,65 @@
+{
+  "name": "time-tracker-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.ts,.tsx,.vue src",
+    "type-check": "vue-tsc --noEmit",
+    "prepare": "husky install",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@stomp/stompjs": "^7.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "@vueuse/core": "^9.5.0",
+    "ant-design-vue": "^4.1.2",
+    "dayjs": "^1.11.6",
+    "happy-dom": "^14.12.3",
+    "inter-ui": "^3.19.3",
+    "line-awesome": "^1.3.0",
+    "lodash": "^4.17.21",
+    "md5": "^2.3.0",
+    "pinia": "^2.0.23",
+    "pinia-plugin-persistedstate": "^2.4.0",
+    "plural-ru": "^2.0.2",
+    "qs": "^6.11.0",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.6",
+    "ws": "^8.17.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
+  },
+  "devDependencies": {
+    "@pinia/testing": "^0.1.3",
+    "@types/lodash": "^4.14.191",
+    "@types/md5": "^2.3.2",
+    "@types/qs": "^6.9.7",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "@vitest/coverage-istanbul": "^1.6.0",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.26.0",
+    "husky": "^8.0.2",
+    "less": "^4.1.3",
+    "lint-staged": "^13.1.0",
+    "path": "^0.12.7",
+    "prettier": "2.8.1",
+    "sass": "^1.55.0",
+    "typescript": "^5.5.4",
+    "vite": "^3.2.0",
+    "vue-tsc": "^2.0.29",
+    "vitest": "^1.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.ant-layout {
+  background: #f2f4f6;
+}
+
+.ant-page-header {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.ant-table-pagination.ant-pagination {
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-bottom: 0;
+  margin-top: 24px;
+}
+
+.ant-btn-icon-only {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-btn .la + span {
+  margin-left: 8px;
+}
+
+.ant-btn[disabled] {
+  cursor: default;
+}
+
+.ant-card {
+  box-shadow: 0 20px 27px rgb(0 0 0 / 5%);
+}
+
+.ant-card-head {
+  padding: 0 16px;
+
+  @include respond-to($bp-lg) {
+    padding: 0 24px;
+  }
+}
+
+.ant-checkbox-inner {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+
+  &::after {
+    left: 25%;
+  }
+
+  .ant-checkbox-input:focus + & {
+    box-shadow: 0 0 0 1px white inset;
+  }
+}
+
+.ant-form-item-with-help {
+  margin-bottom: 24px;
+
+  .ant-form-item-explain {
+    min-height: auto;
+  }
+}

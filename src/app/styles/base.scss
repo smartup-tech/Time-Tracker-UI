@@ -1,0 +1,71 @@
+@import './vars.scss';
+
+:root {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --color-primary: #1890ff;
+  --color-success: #4bb543;
+  --color-error: #ed4337;
+  --color-warning: #ff8f00;
+  --color-text-default: rgba(0, 0, 0, 0.85);
+  --color-text-muted: rgba(0, 0, 0, 0.65);
+  --color-text-faded: rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: Inter, 'system-ui', Helvetica, Arial, sans-serif;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--color-text-default);
+  background: #f2f4f6;
+}
+
+@supports (font-variation-settings: normal) {
+  body {
+    font-family: 'Inter var', 'system-ui', Helvetica, Arial, sans-serif;
+  }
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.app {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.bg-cell {
+  &__weekend {
+    background-color: $bg-weekend-cell !important;
+  }
+
+  &__irregular {
+    background-color: $bg-irregular-cell !important;
+  }
+
+  &__shortened {
+    background-color: $bg-shorneted-cell !important;
+  }
+}
