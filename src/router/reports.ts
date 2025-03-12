@@ -42,7 +42,7 @@ export const reportRoutes = [
     name: PageName.PERSONAL_HOURS_REPORT,
     component: PersonalHoursReportPage,
     meta: {
-      hasAccess: [UserRole.ROLE_ADMIN, UserRole.ROLE_USER],
+      hasAccess: [UserRole.ROLE_ADMIN, UserRole.ROLE_EMPLOYEE],
     },
   },
 ];

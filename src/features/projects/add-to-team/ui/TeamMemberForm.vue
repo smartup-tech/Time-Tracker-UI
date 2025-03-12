@@ -24,13 +24,13 @@ const { fetchUsersForProject, reset: resetStore } = usePickUserStore();
 const { isLoading, users } = storeToRefs(usePickUserStore());
 
 const model: CreateTeamMember = reactive({
-  userId: null,
+  employeeId: null,
   projectRoleId: 'EMPLOYEE',
   externalRate: undefined,
 });
 
 const rules: Record<string, Rule[]> = reactive({
-  userId: [{ required: true, message: 'Выберите сотрудника' }],
+  employeeId: [{ required: true, message: 'Выберите сотрудника' }],
   externalRate: [
     {
       type: 'number',
@@ -89,7 +89,7 @@ onBeforeUnmount(() => {
   <Form hide-required-mark label-align="left" v-model="model">
     <Form.Item
       label="Сотрудник"
-      v-bind="validateInfos.userId"
+      v-bind="validateInfos.employeeId"
       :colon="false"
       :label-col="{ span: 6 }"
     >
@@ -98,7 +98,7 @@ onBeforeUnmount(() => {
         :options="userOptions"
         show-search
         :filter-option="false"
-        v-model:value="model.userId as SelectValue"
+        v-model:value="model.employeeId as SelectValue"
         @search="onSearch"
       />
     </Form.Item>

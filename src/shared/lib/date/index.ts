@@ -60,6 +60,11 @@ export const formatDate = (
   parseFormat = DateFormat.ISO_DATE
 ) => dayjs(value, parseFormat).format(format);
 
+export const formatTimestampDate = (
+  value: number,
+  format = DateFormat.DAY_MONTH_YEAR
+) => dayjs(value).format(format);
+
 export const getPluralHours = (value: number) =>
   pluralRu(value, '%d час', '%d часа', '%d часов');
 

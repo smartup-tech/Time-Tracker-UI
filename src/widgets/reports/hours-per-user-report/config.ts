@@ -45,12 +45,12 @@ export const useUserHoursReportConfig = () => {
       sorter: {
         compare: (a: UserHoursReportRecord, b: UserHoursReportRecord) =>
           getFullName({
-            firstName: a.userFirstName,
-            lastName: a.userLastName,
+            firstName: a.employeeFirstName,
+            lastName: a.employeeLastName,
           }).localeCompare(
             getFullName({
-              firstName: b.userFirstName,
-              lastName: b.userLastName,
+              firstName: b.employeeFirstName,
+              lastName: b.employeeLastName,
             }),
             locale.value,
             {
@@ -60,12 +60,12 @@ export const useUserHoursReportConfig = () => {
         multiple: 3,
       },
       customRender: ({
-        record: { userFirstName: firstName, userLastName: lastName },
+        record: { employeeFirstName: firstName, employeeLastName: lastName },
       }) => getFullName({ firstName, lastName }),
       filters: userFilters.value,
       filteredValue: filters.value.user,
       onFilter: (value, record: UserHoursReportRecord) =>
-        value === record.userId,
+        value === record.employeeId,
     },
     {
       key: 'project',

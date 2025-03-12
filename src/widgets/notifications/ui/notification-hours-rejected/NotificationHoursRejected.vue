@@ -1,47 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Button } from 'ant-design-vue';
-import { useRouter } from 'vue-router';
-
 import { DateFormat } from '@/constants';
-import { PageName } from '@/pages';
 import { LAIcon } from '@/shared/ui';
-import { formatDate } from '@/shared/lib';
+import { formatTimestampDate } from '@/shared/lib';
 
 import { NotificationBase } from '../notification-base';
 
 import type { NotificationHoursRejected } from '@/types';
 
-const props = defineProps<{
+defineProps<{
   notification: NotificationHoursRejected;
 }>();
-
-const emit = defineEmits(['markRead']);
-
-const router = useRouter();
-
-const unit = computed<NotificationHoursRejected['data']['unit']>(
-  () => props.notification.data.unit
-);
-const project = computed<NotificationHoursRejected['data']['project']>(
-  () => props.notification.data.project
-);
-const task = computed<NotificationHoursRejected['data']['task']>(
-  () => props.notification.data.task
-);
-
-const goToUnit = (unit: NotificationHoursRejected['data']['unit']) => {
-  router.push({
-    name: PageName.TRACKER,
-    query: {
-      ts: unit.workDay,
-      uid: unit.id,
-    },
-    force: true,
-  });
-
-  emit('markRead');
-};
 </script>
 
 <template>
@@ -52,15 +20,21 @@ const goToUnit = (unit: NotificationHoursRejected['data']['unit']) => {
       <LAIcon icon="times-circle" size="large" />
     </template>
     <template #description>
-      <span class="unit-date">
-        {{ formatDate(unit.workDay, DateFormat.DAY_MONTH_SHORT) }}
-      </span>
-      {{ project.name }}, {{ task.name }}
-    </template>
-    <template #extra>
-      <Button type="primary" size="small" @click="goToUnit(unit)">
-        Перейти
-      </Button>
+      Время за период
+      {{
+        formatTimestampDate(
+          notification.data.startOfPeriodHasRejection,
+          DateFormat.DAY_MONTH
+        )
+      }}
+      -
+      {{
+        formatTimestampDate(
+          notification.data.endOfPeriodHasRejection,
+          DateFormat.DAY_MONTH
+        )
+      }}
+      не согласовано.
     </template>
   </NotificationBase>
 </template>

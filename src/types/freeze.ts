@@ -10,5 +10,5 @@ export type FreezeStatus =
 export type FreezeRecord = {
   freezeDate: string;
   status: FreezeStatus;
-  user: User;
+  employees: User;
 };

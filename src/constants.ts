@@ -1,11 +1,11 @@
 export enum UserRole {
-  ROLE_USER = 'ROLE_USER',
+  ROLE_EMPLOYEE = 'ROLE_EMPLOYEE',
   ROLE_ADMIN = 'ROLE_ADMIN',
   ROLE_REPORT_RECEIVER = 'ROLE_REPORT_RECEIVER',
 }
 
 export const userRoles = {
-  [UserRole.ROLE_USER]: 'Пользователь',
+  [UserRole.ROLE_EMPLOYEE]: 'Пользователь',
   [UserRole.ROLE_ADMIN]: 'Администратор',
   [UserRole.ROLE_REPORT_RECEIVER]: 'Просмотр отчетов',
 };
@@ -68,4 +68,4 @@ export const Days = [
   'Воскресенье',
 ];
 
-export const FEEDBACK_LINK = 'https://forms.gle/PvZD7maqKFCng2Ux7';
+export const FEEDBACK_LINK = 'https://forms.gle/92ZwD9qvNCbtGwwj8';

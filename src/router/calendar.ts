@@ -1,6 +1,9 @@
 import { UserRole } from '@/constants';
 import { paths, PageName } from '@/pages';
-import { ProductionCalendarCreatePage, ProductionCalendarDisplayPage } from '@/pages/calendar';
+import {
+  ProductionCalendarCreatePage,
+  ProductionCalendarDisplayPage,
+} from '@/pages/calendar';
 
 export const calendarRoutes = [
   {
@@ -9,7 +12,7 @@ export const calendarRoutes = [
     component: ProductionCalendarDisplayPage,
     meta: {
       hasAccess: [
-        UserRole.ROLE_USER,
+        UserRole.ROLE_EMPLOYEE,
         UserRole.ROLE_REPORT_RECEIVER,
         UserRole.ROLE_ADMIN,
       ],
@@ -20,9 +23,7 @@ export const calendarRoutes = [
     name: PageName.PRODUCTION_CALENDAR_CREATE,
     component: ProductionCalendarCreatePage,
     meta: {
-      hasAccess: [
-        UserRole.ROLE_ADMIN,
-      ],
+      hasAccess: [UserRole.ROLE_ADMIN],
     },
   },
 ];

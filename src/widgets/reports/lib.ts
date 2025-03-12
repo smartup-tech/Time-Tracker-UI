@@ -26,8 +26,8 @@ export const useExportedReportData = (
         if (column.dataIndex === 'user') {
           const userRecord = record as UserHoursReportRecord;
           return getFullName({
-            firstName: userRecord.userFirstName,
-            lastName: userRecord.userLastName,
+            firstName: userRecord.employeeFirstName,
+            lastName: userRecord.employeeLastName,
           });
         }
 

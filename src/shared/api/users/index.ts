@@ -16,30 +16,30 @@ export const fetchUsers = async (
   return handleJSON(response);
 };
 
-export const fetchUserById = (userId: number): Promise<UserDetails> =>
-  http.get(`${BASE_URL}/${userId}`).then(handleJSON);
+export const fetchUserById = (employeeId: number): Promise<UserDetails> =>
+  http.get(`${BASE_URL}/${employeeId}`).then(handleJSON);
 
 export const createUser = (user: CreateUser): Promise<User> =>
   http.post(BASE_URL, user).then(handleJSON);
 
 export const updateUser = (
-  userId: number,
+  employeeId: number,
   user: Partial<User>
-): Promise<User> => http.patch(`${BASE_URL}/${userId}`, user).then(handleJSON);
+): Promise<User> =>
+  http.patch(`${BASE_URL}/${employeeId}`, user).then(handleJSON);
 
 export const archiveUser = async (
-  userId: number,
+  employeeId: number,
   params?: UserArchiveRequestParams
 ): Promise<User> => {
   const query = stringifyQueryParams(params);
-  const response = await http.post(`${BASE_URL}/${userId}/archive${query}`);
+  const response = await http.post(`${BASE_URL}/${employeeId}/archive${query}`);
 
   return handleJSON(response);
 };
 
-export const unArchiveUser = async (
-  userId: number): Promise<User> => {
-  const response = await http.post(`${BASE_URL}/${userId}/unArchive`);
+export const unArchiveUser = async (employeeId: number): Promise<User> => {
+  const response = await http.post(`${BASE_URL}/${employeeId}/unArchive`);
   return handleJSON(response);
 };
 

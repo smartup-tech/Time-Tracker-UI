@@ -6,6 +6,6 @@ export type TimesheetWeeklyResponse = {
 };
 
 export type SubmitTimesheetRequest = {
-  userId: number | null;
+  employeeId: number | null;
   weeks: string[];
 };

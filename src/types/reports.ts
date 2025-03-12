@@ -17,9 +17,9 @@ export type UserHoursReportRecord = HoursRecord & {
   projectName: string;
   taskId: number;
   taskName: string;
-  userId: number;
-  userFirstName: string;
-  userLastName: string;
+  employeeId: number;
+  employeeFirstName: string;
+  employeeLastName: string;
 };
 
 export type ProjectHoursReportRecord = HoursRecord & {

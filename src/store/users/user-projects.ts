@@ -1,6 +1,10 @@
 import { defineStore } from 'pinia';
 
-import { fetchProjectsByUserId, addToTeam, removeFromTeam } from '@/shared/api';
+import {
+  fetchProjectsByEmployeeId,
+  addToTeam,
+  removeFromTeam,
+} from '@/shared/api';
 
 import type { UserProjectsState } from './types';
 
@@ -13,15 +17,15 @@ export const useUserProjectsStore = defineStore('user-projects', {
   }),
 
   actions: {
-    async fetchUserProjects(userId?: number) {
-      if (!userId) {
+    async fetchUserProjects(employeeId?: number) {
+      if (!employeeId) {
         return;
       }
 
       this.isLoading = true;
 
       try {
-        const projects = await fetchProjectsByUserId(userId);
+        const projects = await fetchProjectsByEmployeeId(employeeId);
 
         this.projects = projects;
       } finally {
@@ -29,20 +33,20 @@ export const useUserProjectsStore = defineStore('user-projects', {
       }
     },
 
-    async addUserToProject(userId: number, userProject: CreateUserProject) {
+    async addUserToProject(employeeId: number, userProject: CreateUserProject) {
       const user: CreateTeamMember = {
-        userId,
+        employeeId,
         ...userProject,
       };
       if (userProject.projectId) {
         await addToTeam(userProject.projectId, user);
-        await this.fetchUserProjects(userId);
+        await this.fetchUserProjects(employeeId);
       }
     },
 
-    async removeUserFromProject(userId: number, projectId: number) {
-      await removeFromTeam(projectId, userId);
-      await this.fetchUserProjects(userId);
+    async removeUserFromProject(employeeId: number, projectId: number) {
+      await removeFromTeam(projectId, employeeId);
+      await this.fetchUserProjects(employeeId);
     },
   },
 });

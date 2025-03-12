@@ -85,6 +85,6 @@ export const useProjectsDetailsStore = defineStore('project-details', {
 
     tasks: (state): Task[] => state.project?.tasks || [],
 
-    team: (state): TeamMember[] => state.project?.users || [],
+    team: (state): TeamMember[] => state.project?.employees || [],
   },
 });
