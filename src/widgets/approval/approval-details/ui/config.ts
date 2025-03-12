@@ -18,7 +18,7 @@ export const useApprovalDetailsConfig = () => {
     [
       ...new Map(
         records.value.map(
-          ({ userId: id, firstName, lastName }: SubmittedHours) => [
+          ({ employeeId: id, firstName, lastName }: SubmittedHours) => [
             id,
             { id, firstName, lastName },
           ]
@@ -85,7 +85,7 @@ export const useApprovalDetailsConfig = () => {
         multiple: 3,
       },
       filters: userFilterOptions.value,
-      onFilter: (value, record: SubmittedHours) => value === record.userId,
+      onFilter: (value, record: SubmittedHours) => value === record.employeeId,
     },
     {
       key: 'task',

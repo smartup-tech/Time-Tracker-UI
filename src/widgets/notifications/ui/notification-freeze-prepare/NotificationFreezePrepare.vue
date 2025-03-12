@@ -3,12 +3,14 @@ import dayjs from 'dayjs';
 
 import { NotificationBase } from '../notification-base';
 
-import type { NotificationFreeze } from '@/types';
+import type { NotificationFreezePrepare } from '@/types';
 import { DateFormat } from '@/constants';
 
-defineProps<{
-  notification: NotificationFreeze;
+const props = defineProps<{
+  notification: NotificationFreezePrepare;
 }>();
+
+const splitFreezeDate = props.notification.data.date.split(' ');
 </script>
 
 <template>
@@ -17,7 +19,11 @@ defineProps<{
   >
     <template #description>
       Блокировка запланирована на
-      {{ dayjs(notification.data.date).format(DateFormat.DAY_MONTH_YEAR) }}.
+      {{
+        `${dayjs(splitFreezeDate[0], 'DD.MM.YYYY').format(
+          DateFormat.DAY_MONTH_YEAR
+        )} ${splitFreezeDate[1]} ${splitFreezeDate[2]}`
+      }}.
     </template>
   </NotificationBase>
 </template>

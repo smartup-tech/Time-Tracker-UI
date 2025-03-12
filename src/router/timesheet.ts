@@ -20,9 +20,9 @@ export const timesheetRoutes = [
       uid: /^\d+$/.test(query.uid as string)
         ? Number.parseInt(query.uid as string, 10)
         : undefined,
-    }), 
+    }),
     meta: {
-      hasAccess: [UserRole.ROLE_ADMIN, UserRole.ROLE_USER],
+      hasAccess: [UserRole.ROLE_ADMIN, UserRole.ROLE_EMPLOYEE],
     },
   },
   {

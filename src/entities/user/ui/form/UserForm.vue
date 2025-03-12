@@ -75,7 +75,7 @@ const model = ref<CreateUser | UpdateUser>({
   lastName: '',
   middleName: '',
   email: '',
-  roles: ['ROLE_USER'],
+  roles: ['ROLE_EMPLOYEE'],
   positionId: undefined,
   ...props.initialData,
 });
@@ -151,7 +151,7 @@ const onSubmit = async (_keepEditing: boolean) => {
 const onCancel = () => emit('cancel');
 
 const role = computed({
-  get: () => model.value.roles?.[0] || 'ROLE_USER',
+  get: () => model.value.roles?.[0] || 'ROLE_EMPLOYEE',
   set: (value) =>
     (model.value = {
       ...model.value,
@@ -260,10 +260,10 @@ onBeforeMount(async () => {
       />
     </Form.Item>
 
-    <Form.Item
-      :wrapper-col="!sm ? { span: 18, offset: 6 } : undefined"
-    >
-      <Checkbox v-model:checked="withPassword">{{ !props.userId ? 'Установить пароль' : 'Обновить пароль' }}</Checkbox>
+    <Form.Item :wrapper-col="!sm ? { span: 18, offset: 6 } : undefined">
+      <Checkbox v-model:checked="withPassword">{{
+        !props.userId ? 'Установить пароль' : 'Обновить пароль'
+      }}</Checkbox>
     </Form.Item>
     <template v-if="withPassword">
       <Form.Item name="password" label="Пароль" :rules="rules.password">

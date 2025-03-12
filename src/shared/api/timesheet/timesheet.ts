@@ -13,11 +13,11 @@ const BASE_URL = '/api/trackUnits';
 
 export const fetchWeeklyTimesheet = async (
   startDate: string,
-  userId?: number | null
+  employeeId?: number | null
 ): Promise<TimesheetWeeklyResponse> => {
   const query = stringifyQueryParams({
     dateWeek: startDate,
-    userId,
+    employeeId,
   });
   const response = await http.get(`${BASE_URL}/week${query}`);
 
@@ -25,9 +25,9 @@ export const fetchWeeklyTimesheet = async (
 };
 
 export const fetchUnsubmittedHours = async (
-  userId?: number | null
+  employeeId?: number | null
 ): Promise<WeekHours[]> => {
-  const query = stringifyQueryParams({ userId });
+  const query = stringifyQueryParams({ employeeId });
   const response = await http.get(`${BASE_URL}/unsubmitted${query}`);
 
   return handleJSON(response);
@@ -45,15 +45,15 @@ export const fetchAvailableUsers = async (
   params?: SearchableRequestParams
 ): Promise<User[]> => {
   const query = stringifyQueryParams(params);
-  const response = await http.get(`${BASE_URL}/users${query}`);
+  const response = await http.get(`${BASE_URL}/employees${query}`);
 
   return handleJSON(response);
 };
 
 export const fetchAvailableProjects = async (
-  userId?: number | null
+  employeeId?: number | null
 ): Promise<Project[]> => {
-  const query = stringifyQueryParams({ userId });
+  const query = stringifyQueryParams({ employeeId });
   const response = await http.get(`${BASE_URL}/projects${query}`);
 
   return handleJSON(response);

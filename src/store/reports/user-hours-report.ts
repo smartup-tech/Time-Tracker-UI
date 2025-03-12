@@ -101,9 +101,9 @@ export const useUserHoursReportsStore = defineStore('user-hours-reports', {
         ...new Map(
           this.report.map(
             ({
-              userId: id,
-              userFirstName: firstName,
-              userLastName: lastName,
+              employeeId: id,
+              employeeFirstName: firstName,
+              employeeLastName: lastName,
             }: UserHoursReportRecord) => [
               id,
               {

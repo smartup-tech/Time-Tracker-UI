@@ -6,7 +6,7 @@ export interface TimesheetEntry {
   projectName: string;
   taskId?: number;
   taskName: string;
-  userId: number | null;
+  employeeId: number | null;
   observed: boolean;
   units: TimesheetUnit[];
 }
@@ -55,7 +55,7 @@ export type SubmittedHours = {
   taskId: number;
   taskName: string;
   trackUnitId: number;
-  userId: number;
+  employeeId: number;
   workDay: string;
 };
 
@@ -63,10 +63,10 @@ export type MetaDayInfo = {
   date: string;
   status: ProductionCalendarDayStatus;
   standardHours: number;
-}
+};
 
 export type SubmittedWorkDays = {
-  userId: number;
+  employeeId: number;
   firstName: string;
   lastName: string;
   summaryTrackUnits: SubmittedSummaryDay[];
@@ -76,7 +76,7 @@ export type SubmittedWorkDays = {
 export type SubmittedSummaryDay = {
   date: string;
   hours: number;
-}
+};
 
 export type SubmittedProjectTaskWorkDay = {
   projectId: number;
@@ -84,13 +84,13 @@ export type SubmittedProjectTaskWorkDay = {
   taskId: number;
   taskName: string;
   trackUnits: SubmittedTrackUnit[];
-}
+};
 
 export type SubmittedTrackUnit = {
   trackUnitId: number;
   date: string;
   hours: number;
-}
+};
 
 export type SubmittedDataForAction = {
   trackUnitId: number;

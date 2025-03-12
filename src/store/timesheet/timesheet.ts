@@ -93,7 +93,7 @@ export const useTimesheetStore = defineStore('timesheet', {
         taskId: undefined,
         projectName: '',
         taskName: '',
-        userId: this.userId,
+        employeeId: this.userId,
         observed: true,
         units: this.weekdays.map((day: Weekday) => ({
           billable: true,
@@ -202,7 +202,7 @@ export const useTimesheetStore = defineStore('timesheet', {
 
     async submitTimesheet(weeks: string[]) {
       await submitTimesheet({
-        userId: this.userId,
+        employeeId: this.userId,
         weeks,
       });
     },
@@ -276,7 +276,7 @@ export const useTimesheetStore = defineStore('timesheet', {
 
     getByDate: (state) => (date: string) =>
       state.days.find((day: TimesheetDay) => date === day.date),
-      
+
     hasUnsubmittedHours: (state): boolean => state.unsubmitted.length > 0,
   },
 });

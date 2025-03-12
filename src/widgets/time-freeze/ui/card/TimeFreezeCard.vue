@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import dayjs from 'dayjs';
 import { Card, Button } from 'ant-design-vue';
 import Modal from 'ant-design-vue/es/modal';
+import { h } from 'vue';
 
 import { useBoolean } from '@/shared/lib';
 import { useTimeFreezeStore } from '@/store';
@@ -11,6 +12,9 @@ import { useTimeFreezeStore } from '@/store';
 import { TimeFreezeForm } from '..';
 import { DateFormat } from '@/constants';
 import { FreezeRecord } from '@/types';
+
+import union from 'lodash/union';
+import without from 'lodash/without';
 
 const {
   fetchLastFreezeRecord,
@@ -24,20 +28,70 @@ const { lastFreeze, unfreezeRecord, isLoading, freezeDates, sortedRecords } =
 
 const [, { set: setHasLockScheduled }] = useBoolean(false);
 
-const today = dayjs().startOf('day');
-
-const confirmLock = (datesToFreeze: string[]) => {
+const confirmPlanLock = (
+  datesToFreeze: string[],
+  moreDatesToFreeze: string[]
+) => {
   Modal.confirm({
-    title: () => `Запланировать блокирови на ${datesToFreeze}?`,
-    content: () =>
-      `В указанные даты все часы по ${datesToFreeze} включительно будут заблокированы.`,
+    title: () => `Запланировать блокировки?`,
+    content: () => {
+      return h('div', [
+        h('span', 'В указанные даты все часы по'),
+        h(
+          'ul',
+          { class: 'no-space-after' },
+          moreDatesToFreeze.map((text) => {
+            return h('li', text);
+          })
+        ),
+        h('span', 'включительно будут заблокированы.'),
+      ]);
+    },
     okText: 'Да, запланировать',
     async onOk() {
-      if (datesToFreeze.length) {
-        await freezeTime(datesToFreeze);
-
+      const totalDates = union(datesToFreeze, moreDatesToFreeze);
+      if (totalDates.length) {
+        await freezeTime(totalDates).then(() => {
+          // Update the state if a past date is selected
+          const today = dayjs().startOf('day');
+          if (totalDates.some((date) => dayjs(date).isBefore(today))) {
+            fetchFreezeRecords();
+            fetchLastFreezeRecord();
+            fetchUnfreezeRecord();
+          }
+        });
         setHasLockScheduled(true);
+        selectedDates.value = [];
       }
+    },
+  });
+};
+
+const confirmPlanUnlock = (
+  datesToFreeze: string[],
+  lessDatesToFreeze: string[]
+) => {
+  Modal.confirm({
+    title: () => `Отменить запланированные блокировки?`,
+    content: () => {
+      return h('div', [
+        h('span', 'Запланированные на следующие даты блокировки'),
+        h(
+          'ul',
+          { class: 'no-space-after' },
+          lessDatesToFreeze.map((text) => {
+            return h('li', text);
+          })
+        ),
+        h('span', 'будут отменены.'),
+      ]);
+    },
+    okText: 'Да, отменить',
+    async onOk() {
+      const totalDates = without(datesToFreeze, ...lessDatesToFreeze);
+      await freezeTime(totalDates);
+      setHasLockScheduled(totalDates.length > 0);
+      selectedDates.value = [];
     },
   });
 };
@@ -65,6 +119,7 @@ onBeforeMount(async () => {
 });
 
 const freezeRecords = shallowRef<string[]>([]);
+const selectedDates = shallowRef<string[]>([]);
 
 watch(freezeDates, () => {
   freezeRecords.value = [...freezeDates.value];
@@ -95,11 +150,11 @@ const getScheduledRecordText = (record: FreezeRecord) => {
     <div class="freeze-card-container">
       <TimeFreezeForm
         class="freeze-card-container__form"
-        :disable-before="today"
-        inclusive
         scheduled
         v-model:freeze-records="freezeRecords"
-        @submit="confirmLock"
+        v-model:selected-dates="selectedDates"
+        @submit-plan-freeze="confirmPlanLock"
+        @submit-plan-unfreeze="confirmPlanUnlock"
       />
       <div class="freeze-card-container__list">
         <h3>Запланированные блокировки</h3>
@@ -141,6 +196,12 @@ const getScheduledRecordText = (record: FreezeRecord) => {
   &__dates {
     display: flex;
     flex-direction: column;
+  }
+}
+
+.ant-modal-confirm-content {
+  .no-space-after {
+    margin-bottom: 0;
   }
 }
 </style>

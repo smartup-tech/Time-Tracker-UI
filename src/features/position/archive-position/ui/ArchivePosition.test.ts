@@ -19,7 +19,7 @@ describe('Archive Position', () => {
       new HTTPException(123, {
         errorCode: ErrorCode.NOT_PROCESSED_TRACK_UNITS_FOR_PROJECT,
         relatedEntities: [
-          { archived: false, id: 123, roles: [UserRole.ROLE_USER] },
+          { archived: false, id: 123, roles: [UserRole.ROLE_EMPLOYEE] },
         ],
         errorMessage: '',
       })

@@ -62,9 +62,9 @@ const roleOptions = Object.values(TeamRole).map((value) => ({
 }));
 
 const edit = (user: TeamMember) => {
-  const { id: userId, externalRate, projectRoleId } = user;
+  const { id: employeeId, externalRate, projectRoleId } = user;
 
-  editable[createUid(user)] = { userId, externalRate, projectRoleId };
+  editable[createUid(user)] = { employeeId, externalRate, projectRoleId };
 };
 
 const cancelEdit = (uid: string) => delete editable[uid];
@@ -160,7 +160,10 @@ const createUid = ({ id, projectRoleId }: TeamMember): string =>
                 </Button>
               </Tooltip>
 
-              <Popconfirm placement="topRight" @confirm="remove(record  as TeamMember)">
+              <Popconfirm
+                placement="topRight"
+                @confirm="remove(record as TeamMember)"
+              >
                 <template #title> Удалить сотрудника из команды? </template>
                 <Tooltip title="Удалить">
                   <Button shape="circle" type="text">

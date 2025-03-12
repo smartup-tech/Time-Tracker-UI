@@ -28,14 +28,14 @@ const { hasAdminRole } = storeToRefs(useAuthStore());
         :to="{
           name: PageName.USER_EDIT,
           params: {
-            userId: notification.data.user.id,
+            userId: notification.data.employee.id,
           },
         }"
       >
-        {{ getFullName(notification.data.user) }}
+        {{ getFullName(notification.data.employee) }}
       </RouterLink>
       <template v-else>
-        {{ getFullName(notification.data.user) }}
+        {{ getFullName(notification.data.employee) }}
       </template>
     </template>
   </NotificationBase>

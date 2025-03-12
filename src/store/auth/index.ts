@@ -75,7 +75,7 @@ export const useAuthStore = defineStore('auth', {
     isAuthenticated: (state): boolean => Boolean(state.profile),
 
     hasUserRole: (state): boolean =>
-      state.profile?.roles?.includes(UserRole.ROLE_USER) || false,
+      state.profile?.roles?.includes(UserRole.ROLE_EMPLOYEE) || false,
 
     hasAdminRole: (state): boolean =>
       state.profile?.roles?.includes(UserRole.ROLE_ADMIN) || false,

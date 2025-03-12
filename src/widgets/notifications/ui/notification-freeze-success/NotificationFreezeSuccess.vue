@@ -19,7 +19,7 @@ defineProps<{
     <template #icon>
       <LAIcon icon="check-circle" size="large" />
     </template>
-    <template #description>
+    <template v-if="notification.data" #description>
       Часы заморожены по
       {{ dayjs(notification.data.date).format(DateFormat.DAY_MONTH_YEAR) }}
       включительно.

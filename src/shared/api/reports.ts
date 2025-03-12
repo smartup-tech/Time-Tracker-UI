@@ -12,7 +12,7 @@ export const fetchUserHoursReport = async (
   params: ReportRequestParams
 ): Promise<UserHoursReport> => {
   const query = stringifyQueryParams(params);
-  const response = await http.get(`${BASE_URL}/hoursForUsers${query}`);
+  const response = await http.get(`${BASE_URL}/hoursForEmployees${query}`);
 
   return handleJSON(response);
 };
@@ -30,7 +30,9 @@ export const fetchPersonalHoursReport = async (
   params: ReportRequestParams
 ): Promise<UserHoursReport> => {
   const query = stringifyQueryParams(params);
-  const response = await http.get(`${BASE_URL}/hoursForCurrentUser${query}`);
+  const response = await http.get(
+    `${BASE_URL}/hoursForCurrentEmployee${query}`
+  );
 
   return handleJSON(response);
 };

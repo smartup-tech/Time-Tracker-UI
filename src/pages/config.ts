@@ -68,7 +68,7 @@ export const DEFAULT_PAGE = PageName.TRACKER;
 
 export const HOME_PAGE: Record<string, string> = {
   default: DEFAULT_PAGE,
-  [UserRole.ROLE_USER]: PageName.TRACKER,
+  [UserRole.ROLE_EMPLOYEE]: PageName.TRACKER,
   [UserRole.ROLE_ADMIN]: PageName.TRACKER,
   [UserRole.ROLE_REPORT_RECEIVER]: PageName.REPORTS,
 };

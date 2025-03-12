@@ -25,7 +25,7 @@ const router = useRouter();
 const { canApproveTimesheets } = storeToRefs(useAuthStore());
 
 const totalHours = computed<number>(
-  () => props.notification.data.usersHours.sumHours
+  () => props.notification.data.employeesHours.sumHours
 );
 
 const navigateToApproval = () => {

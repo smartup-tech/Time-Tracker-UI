@@ -16,7 +16,7 @@ export interface ProjectDetails extends Project {
   createdDate: string;
   lastModifiedDate: string;
   tasks: Task[];
-  users: TeamMember[];
+  employees: TeamMember[];
 }
 
 export interface TeamMember
@@ -26,7 +26,7 @@ export interface TeamMember
 }
 
 export type CreateTeamMember = {
-  userId: number | null;
+  employeeId: number | null;
   projectRoleId: `${TeamRole}`;
   externalRate?: number;
 };

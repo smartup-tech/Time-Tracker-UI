@@ -1,7 +1,6 @@
 import { NotificationType, TeamRole } from '@/constants';
 
 import type { Project } from './projects';
-import type { TimesheetUnit } from './timesheet';
 import type { User } from './users';
 
 type Changemap = Record<
@@ -47,7 +46,7 @@ export interface NotificationProjectAccessGranted extends BaseNotification {
   type: NotificationType.PROJECT_ROLE_GRANTED;
   data: {
     project: Pick<Project, 'id' | 'name'>;
-    user: {
+    employee: {
       projectRole: `${TeamRole}`;
     };
   };
@@ -56,30 +55,23 @@ export interface NotificationProjectAccessGranted extends BaseNotification {
 export interface NotificationAdminChange extends BaseNotification {
   type: NotificationType.ADMIN_ADDED | NotificationType.ADMIN_REMOVED;
   data: {
-    user: Pick<User, 'id' | 'firstName' | 'lastName'>;
+    employee: Pick<User, 'id' | 'firstName' | 'lastName'>;
   };
 }
 
 export interface NotificationHoursRejected extends BaseNotification {
   type: NotificationType.HOURS_REJECTED;
   data: {
-    project: {
-      id: number;
-      name: string;
-    };
-    task: {
-      id: number;
-      name: string;
-    };
-    unit: Pick<TimesheetUnit, 'id' | 'workDay'>;
+    startOfPeriodHasRejection: number;
+    endOfPeriodHasRejection: number;
   };
 }
 
 export interface NotificationApprovalRequired extends BaseNotification {
   type: NotificationType.APPROVAL_REQUIRED;
   data: {
-    usersHours: {
-      numberUsers: number;
+    employeesHours: {
+      numberEmployees: number;
       projectId: number;
       sumHours: number;
     };
@@ -88,6 +80,13 @@ export interface NotificationApprovalRequired extends BaseNotification {
 
 export interface NotificationFreeze extends BaseNotification {
   type: NotificationType.FREEZE_SUCCESS | NotificationType.FREEZE_ERROR;
+  data?: {
+    date: string;
+  };
+}
+
+export interface NotificationFreezePrepare extends BaseNotification {
+  type: NotificationType.FREEZE_PREPARE;
   data: {
     date: string;
   };
@@ -109,7 +108,8 @@ export type Notification =
   | NotificationHoursRejected
   | NotificationApprovalRequired
   | NotificationUnfreeze
-  | NotificationFreeze;
+  | NotificationFreeze
+  | NotificationFreezePrepare;
 
 export interface NotificationSchedule {
   days: number[];

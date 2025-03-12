@@ -27,11 +27,11 @@ export const fetchProjects = async (
 export const fetchProjectById = (projectId: number): Promise<ProjectDetails> =>
   http.get(`${BASE_URL}/${projectId}`).then(handleJSON);
 
-export const fetchProjectsByUserId = async (
-  userId: number
+export const fetchProjectsByEmployeeId = async (
+  employeeId: number
 ): Promise<UserProject[]> => {
-  const query = stringifyQueryParams({ userId });
-  const response = await http.get(`${BASE_URL}/user${query}`);
+  const query = stringifyQueryParams({ employeeId });
+  const response = await http.get(`${BASE_URL}/employee${query}`);
 
   return handleJSON(response);
 };
@@ -53,13 +53,13 @@ export const archiveProject = (projectId: number): Promise<Project> =>
 
 export const addToTeam = (
   projectId: number,
-  user: CreateTeamMember
+  employee: CreateTeamMember
 ): Promise<Project> =>
   http
-    .post(`${BASE_URL}/${projectId}/modifyProjectUser`, user)
+    .post(`${BASE_URL}/${projectId}/modifyProjectEmployee`, employee)
     .then(handleJSON);
 
-export const removeFromTeam = (projectId: number, userId: number) =>
+export const removeFromTeam = (projectId: number, employeeId: number) =>
   http
-    .post(`${BASE_URL}/${projectId}/deleteProjectUser`, { userId })
+    .post(`${BASE_URL}/${projectId}/deleteProjectEmployee`, { employeeId })
     .then(handleJSON);

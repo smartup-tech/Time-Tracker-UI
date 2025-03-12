@@ -38,7 +38,7 @@ const getUserSubmittedTableRow = computed(() => {
   return records.value.map((record) => {
     const row: ApprovalDayRow = {};
 
-    row['key'] = record.userId;
+    row['key'] = record.employeeId;
     row['username'] = `${record.firstName} ${record.lastName}`.trim();
     let totalHours = 0;
     record.summaryTrackUnits.forEach((summary) => {
@@ -64,7 +64,7 @@ const getProjectTaskSubmittedTableRow = computed(() => {
 
       record.projectTrackUnits.forEach((projectTrackUnit) => {
         const row: ApprovalDayNestedRow = {};
-        row['key'] = record.userId;
+        row['key'] = record.employeeId;
         row['projectTaskName'] =
           `${projectTrackUnit.projectName} ${projectTrackUnit.taskName}`.trim();
 

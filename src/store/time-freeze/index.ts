@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia';
 
-import { createLock, fetchLocks, fetchLastLock, fetchUnfreezeLock, unLock } from '@/shared/api';
+import {
+  createLock,
+  fetchLocks,
+  fetchLastLock,
+  fetchUnfreezeLock,
+  unLock,
+} from '@/shared/api';
 
 import type { FreezeRecord } from '@/types';
 import type { TimeFreezeState } from './types';
@@ -22,8 +28,10 @@ export const useTimeFreezeStore = defineStore('time-freeze', {
       ),
 
     freezeDates(): string[] {
-      return this.sortedRecords.filter(record => record.status !== "UN_FREEZE").map(record => dayjs(record.freezeDate).toISODate())
-    }
+      return this.sortedRecords
+        .filter((record) => record.status !== 'UN_FREEZE')
+        .map((record) => dayjs(record.freezeDate).toISODate());
+    },
   },
 
   actions: {
@@ -41,15 +49,17 @@ export const useTimeFreezeStore = defineStore('time-freeze', {
 
     async fetchLastFreezeRecord() {
       const record = await fetchLastLock();
-      if (JSON.stringify(record) !== "{}") {
+      if (JSON.stringify(record) !== '{}') {
         this.setLastFreeze(record);
       }
     },
 
     async fetchUnfreezeRecord() {
       const record = await fetchUnfreezeLock();
-      if (JSON.stringify(record) !== "{}") {
+      if (JSON.stringify(record) !== '{}') {
         this.setUnfreeze(record);
+      } else {
+        this.setUnfreeze(null);
       }
     },
 
@@ -72,8 +82,8 @@ export const useTimeFreezeStore = defineStore('time-freeze', {
       this.lastFreeze = record;
     },
 
-    setUnfreeze(record: FreezeRecord) {
+    setUnfreeze(record: FreezeRecord | null) {
       this.unfreezeRecord = record;
-    }
+    },
   },
 });
